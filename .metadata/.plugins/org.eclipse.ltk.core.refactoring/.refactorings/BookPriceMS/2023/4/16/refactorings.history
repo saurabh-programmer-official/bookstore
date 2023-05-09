@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;BookPriceBeanConfig.java&apos; to &apos;BookSearchMS/src/main/java/com.fabellus.booksearch&apos;&#x0D;&#x0A;- Original project: &apos;BookPriceMS&apos;&#x0D;&#x0A;- Destination element: &apos;BookSearchMS/src/main/java/com.fabellus.booksearch&apos;&#x0D;&#x0A;- Original element: &apos;com.fabellus.microservices.bookprice.BookPriceBeanConfig.java&apos;" description="Copy compilation unit" destination="=BookSearchMS/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.fabellus.booksearch" element1="/src\/main\/java&lt;com.fabellus.microservices.bookprice{BookPriceBeanConfig.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1682114599301" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 19
+Implementation-Title: BooksSearchMS
+Implementation-Version: 1.3
+Created-By: Maven Integration for Eclipse
+

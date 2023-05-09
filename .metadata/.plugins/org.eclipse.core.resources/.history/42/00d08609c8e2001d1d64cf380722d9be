@@ -1,0 +1,10 @@
+package com.fabellus.placeorder;
+
+import java.util.List;
+
+public interface PlaceOrderService {
+
+	public OrderInfo placeOrder(OrderInfo orderInfo);
+	public List<Order> getOrdersByUserId(String userId);
+	
+}

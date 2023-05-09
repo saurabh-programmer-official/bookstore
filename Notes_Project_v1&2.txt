@@ -1,0 +1,42 @@
+Actuators being added:
+Actuators bring production ready feaures to your application without actually coding those features  in 
+your application.
+When your application is in production, you need to check the following 
+Health Check , Auduting, Metric gathering, Monitoring etc
+
+There is no app server concept in Micro services.. There is only fat jar.
+Add actuator related dependency .
+Add actuator related properties in application.properties of BookPriceMS
+
+DEvelop BookAdmin Server:
+--------------------
+Make use of https://start.spring.io/
+
+Add RabbitMQ related dependencies to the POM.xml of MicroServices that is either sending or recieving 
+RabbitmQ messages
+
+spring.rabbitmq.host=localhost
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=guest
+spring.rabbitmq.password=guest
+
+Add the Queue and Exchange for Rating and Invntory in JlcBookSearchConfig.java. 
+BookSearch Micro Service is reqcvng messages from these 2 microservices.
+
+BookStoreWeb micro service is only sending data and not recieving any.
+It sends OrdenInfoFull and UserRatingInfo message to respective mircoservices like
+Placeorder and Bookrating Micro Services.
+
+Steps>
+Change POm
+Add RabbitMQ properties in application.properties file
+spring.rabbitmq.host=losthost
+spring.rabbitmq.port=5672
+spring.rabitmq.username=guest
+spring.rabbitmq.password=guest
+
+Add queues, Exchange and Binding beans in configuration.java
+
+In Microservice, you need to hav package:
+com.fabellus.rabbitmq
+this has rabbitmq classes that implement Serializable that are serialized message objects.
