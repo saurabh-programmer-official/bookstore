@@ -8,16 +8,16 @@
   <description>BookPrice developed by Saurabh Bhandari</description>
 <properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 	</properties>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
+		<version>2.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
   <dependencies>
+	 
 	  <dependency>
 		  <groupId>io.springfox</groupId>
 		  <artifactId>springfox-swagger-ui</artifactId>
@@ -31,67 +31,21 @@
 	  <dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-web</artifactId>
-	  </dependency>
- <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-      
-    </dependency>
-	  <dependency>
-		  <groupId>de.codecentric</groupId>
-		  <artifactId>spring-boot-admin-starter-client</artifactId>
-		  <version>2.4.3</version>
-	  </dependency>
-
-	  <dependency>
-		 <groupId>org.springframework.boot</groupId>
-		 <artifactId>spring-boot-starter-actuator</artifactId>
-	  </dependency>
-	 
+	  </dependency>	 
 	  <dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-devtools</artifactId>
 	  </dependency>
-   
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-   
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    	  <dependency>
+   	  <dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-data-jpa</artifactId>
 	  </dependency>
     <dependency>
-		<groupId>org.springframework.cloud</groupId>
-		<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-	</dependency>    
-	<dependency>
-		<groupId>org.springframework.cloud</groupId>
-		<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-	</dependency>
-  <dependency>
 		  <groupId>mysql</groupId>
 		  <artifactId>mysql-connector-java</artifactId>
 		  <version>8.0.32</version>
 	  </dependency>
 	  </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${spring-cloud.version}</version>
-        <type>pom</type>	
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <plugins>

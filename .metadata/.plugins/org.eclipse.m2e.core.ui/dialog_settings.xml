@@ -6,6 +6,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Batch 32\Project\BookStore BS1.1"/>
 			<item value="C:\Batch 32\BookStore V1.1\MyBootAdminServer"/>
 		</list>
 		<list key="projectNameTemplate">

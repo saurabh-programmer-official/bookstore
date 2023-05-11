@@ -17,7 +17,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 @EnableWebMvc
 public class BookPriceBeanConfig implements WebMvcConfigurer{
 
-	@SuppressWarnings("deprecation")
 	private ApiInfo getApiDetails() {
 		return new ApiInfo("JLC BookStore- API",
 				"BookSearchMS- API - part of BookStore",
@@ -27,13 +26,7 @@ public class BookPriceBeanConfig implements WebMvcConfigurer{
 				"Larsen and Turbo",
 				"API under Free to use License"
 				);
-/*
-		return new ApiInfo("JLC BookStore- API", 
-		"BookSearchMS- API - part of BookStore",
-		"1.0","https://www.jlcindia.com", 
-		new Contact("Srinivas Dande", "https://www.jlcindia.com", "sri@jlcindia.com", null), 
-		"Larsen and Turbo","API under Free to use License","www.fabellus.com"); 
-	*/	} 
+	}
 
 	@Bean 
 	public Docket apiDocket() {
@@ -46,7 +39,6 @@ public class BookPriceBeanConfig implements WebMvcConfigurer{
 				.build()
 				.apiInfo(getApiDetails()); 
 		} 
-		//com.fabellus.microservices.bookprice //org.springframework.boot
 		@Override 
 		public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		System.out.println("resource handler called");

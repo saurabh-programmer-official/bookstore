@@ -11,7 +11,8 @@ public interface BookSearchService {
 	public List<Book> getBooksByAuthorAndCategory(String author,String category);	
 	public List<Book> getBooksByAuthor(String author);
 	public BookInfo getBookInfoById(int bookId);
-	//public void updateBookInventory(BookInventory bookInventory);
-	//public void updateBookRating(BookRating bookRating);
+	public void updateBookInventory(BookInventory bookInventory);
+	
 	public Book getBookByBookId(int bookId);
+	public void updateBookRating(BookRating bookRating);
 }

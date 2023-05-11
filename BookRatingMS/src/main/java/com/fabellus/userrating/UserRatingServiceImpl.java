@@ -3,14 +3,11 @@ package com.fabellus.userrating;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
-import com.fabellus.rabbitmq.BookRatingInfo;
-import com.fabellus.rabbitmq.UserRatingInfo;
 
 @Service
 @Transactional
@@ -20,22 +17,13 @@ public class UserRatingServiceImpl implements UserRatingService{
 	UserRatingDAO userRatingDAO;
 	@Autowired
 	BookRatingDAO bookRatingDAO;
-	@Autowired
-	RabbitTemplate rabbitTemplate;
-
-	@RabbitListener(queues="userRating.queue")
-	public void addUserRating(UserRatingInfo userRatingInfo) {
+	
+	public void addUserRating(UserRating userRating) {
 		// TODO Auto-generated method stub
 		
-		UserRating userRating = userRatingDAO.save(
-				new UserRating(
-						userRatingInfo.getBookId(),
-						userRatingInfo.getUserId(),
-						userRatingInfo.getRating(),
-						userRatingInfo.getReview()
-						)
-				);//User rating saved.
-		 
+		//Local User rating save
+		userRatingDAO.save(userRating);
+		
 		int bookId = userRating.getBookId();
 		System.out.println("bookId: "+bookId);
 		double rating= userRating.getRating();
@@ -47,7 +35,7 @@ public class UserRatingServiceImpl implements UserRatingService{
 		double average = sum/userRatingListByBookId.size();
 		System.out.println("avg"+ average);
 		
-		//Update Local database of Rating
+		//Update Local database of Book Rating
 		
 		Optional<BookRating>opt = bookRatingDAO.findById(bookId);
 		BookRating bookRating	=null;
@@ -63,18 +51,12 @@ public class UserRatingServiceImpl implements UserRatingService{
 		 bookRating.setNumber_of_searches(50);
 		 bookRatingDAO.save(bookRating);
 		}
-		//Updating Remote DataBase running in other microservices
-		BookRatingInfo bookRatingInfo = new BookRatingInfo();
-		bookRatingInfo.setBookId(bookRating.getBookId());
-		bookRatingInfo.setRating(bookRating.getRating());
-		bookRatingInfo.setNumber_of_searches(bookRating.getNumber_of_searches());
 		
-		rabbitTemplate.convertAndSend("ratings.exchange", "ratings.key", bookRatingInfo);
 		
-		//Remote database updating using rest template
-//		RestTemplate ratingTemplate = new RestTemplate();
-//		String url ="http://localhost:7000/updaterating";
-//		ratingTemplate.put(url, bookRating);
+//		Remote database updating using rest template
+		RestTemplate ratingTemplate = new RestTemplate();
+		String url ="http://localhost:7000/updaterating";
+		ratingTemplate.put(url, bookRating);
 	}
 	
 	public List<UserRating> getUserRatingsByBookId(int bookId){

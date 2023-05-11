@@ -3,14 +3,11 @@ package com.fabellus.booksearch;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-//import com.fabellus.rabbitmq.BookInventoryInfo;
-//import com.fabellus.rabbitmq.BookRatingInfo;
 
 @Service
 @Transactional
@@ -79,7 +76,7 @@ public class BookSearchServiceImpl implements BookSearchService{
 		
 		//Book Price Info using RestTemplate
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:3003/mybooks/"+bookId;
+		String url = "http://localhost:3002/bookPrice/"+bookId;
 		BookPriceInfo bpf = restTemplate.getForObject(url, BookPriceInfo.class);
 		bookInfo.setPrice(bpf.getPrice());
 		bookInfo.setOffer(bpf.getOffer());
@@ -87,22 +84,16 @@ public class BookSearchServiceImpl implements BookSearchService{
 		return bookInfo;
 	}
 	
-	@RabbitListener(queues= "myinventory.queue")
-	public void updateBookInventory(BookInventory bookInventoryInfo ) {
-	
-//		BookInventory bookInventoryObject = new BookInventory();
-//		bookInventoryObject = bookInventoryDAO.findById(bookId).get();
-//		bookInventoryObject.setBooks_available(inventory);
-		System.out.println("BookSerachMS rabbitMQ methd called");
+	public void updateBookInventory(BookInventory bookInventory ) {
+		
 
-//		System.out.println("bookInvetory value: "+bookInventory.getBookAvailable());
-		BookInventory bookInventory = new BookInventory();
-		bookInventory.setBookAvailable(bookInventoryInfo.getBookAvailable());
-		bookInventory.setBookid(bookInventoryInfo.getBookId());
+		//Update Local Book Inventory
 		bookInventoryDAO.save(bookInventory);
-	}
+		
+		//Remote Book Inventory updates
+
+		}
 	
-	@RabbitListener(queues="ratings.queue")
 	public void updateBookRating(BookRating bookRatingInfo) {
 		BookRating bookRating = new BookRating(bookRatingInfo.getBookId(),bookRatingInfo.getRating(),bookRatingInfo.getNumber_of_searches());
 		bookRatingDAO.save(bookRating);

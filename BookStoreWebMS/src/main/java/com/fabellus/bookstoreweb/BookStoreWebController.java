@@ -17,22 +17,26 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import io.swagger.annotations.ApiModel;
 
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.models.Model;
 
 @CrossOrigin
 @Controller
-//@ApiModel("BookPriceController")
+@ApiModel("BookPriceController")
 public class BookStoreWebController {
 
 	static Logger log = LoggerFactory.getLogger(BookStoreWebController.class);
-	int serialNumber;
+
 	@Autowired
 	BookStoreWebService bookStoreWebService;
-	private Map<Integer,Book> myCartMap=new LinkedHashMap<>();
+	private Map<Integer,BookInfo> myCartMap=new LinkedHashMap<>();
+	
+	private int serialNumber;
+
 	@GetMapping("/")
 	public String showIndexPage(Model model, HttpSession session) {
 	List<String> authorList = bookStoreWebService.getAuthorList();
@@ -40,8 +44,8 @@ public class BookStoreWebController {
 	session.setAttribute("MyAuthorList", authorList);
 	session.setAttribute("MyCategoryList", catList);
 	return "redirect:/showAllBooks";
-	
 	}
+	
 	@GetMapping("/showAllBooks")
 	public String showBooksList(HttpServletRequest request, HttpSession session) {
 	
@@ -49,12 +53,13 @@ public class BookStoreWebController {
 		String author = request.getParameter("author");
 		String category = request.getParameter("category");
 		System.out.println("Author: "+author+" : "+ category);
-		Collection<Book> blist=bookStoreWebService.getAllBooks();
+		Collection<Book> blist=bookStoreWebService.getMyBook(author, category);
 				//.getMyBook(author, category); 
 		session.setAttribute("MyBooksList", blist); 
 		session.setAttribute("MyCartMap", myCartMap); 
 		return "showBooksList1";
 	}
+	
 	@GetMapping("/showSelectedBooks")
 	public String showSelectedBooks(HttpServletRequest request, HttpSession session) {
 		String author = request.getParameter("author");
@@ -63,6 +68,7 @@ public class BookStoreWebController {
 		session.setAttribute("MyBooksList", booksList);
 		return "showBooksList1";
 	}
+	
 	@GetMapping("/showBookInfo")
 	public String getBookInfo(@RequestParam("bookId")String bookId, HttpSession session, HttpServletRequest request) {
 		System.out.println("Show Book Info");
@@ -72,15 +78,17 @@ public class BookStoreWebController {
 		System.out.println("Show Book Info"+bookInfo);
 		return "showBookInfo";
 	}
+	
 	@GetMapping("/addToCart")
 	public String addToCart(@RequestParam("bookId") String bookId, HttpSession session, HttpServletRequest request) {
 		System.out.println("Add to Cart");
-		Book book = bookStoreWebService.getBookByBookId(Integer.parseInt(bookId));
+		BookInfo bookInfo = bookStoreWebService.getBookByBookId(Integer.parseInt(bookId));
         this.serialNumber=this.serialNumber+1;
-		myCartMap.put(serialNumber, book);
+		myCartMap.put(serialNumber, bookInfo);
 		session.setAttribute("MyCartMap", myCartMap);
 		return "redirect:/showSelectedBooks";
 	}
+	
 	@GetMapping("/showMyCart")
 	public String showMYCart(HttpSession session) {
 		Object obj = session.getAttribute("MyCartMap");
@@ -91,6 +99,7 @@ public class BookStoreWebController {
 		return "showCart";
 
 	}
+	
 	@GetMapping("/showRatingsForm")
 	public String showRatingForm(Model model) {
 		UserRating userRating = new UserRating();
@@ -98,18 +107,19 @@ public class BookStoreWebController {
 		model.addAttribute("UserRating",userRating);
 		return "addRating";
 	}
+	
 	@PostMapping("/addMyRating")
 	public String addMyRating(@ModelAttribute ("") UserRating userRating) {
 		System.out.println("Controller Add My Rating");
 		bookStoreWebService.addUserRating(userRating);
 		return null;
 	}
+	
 	@GetMapping("/placeOrder")
 	public String placeOrder(HttpSession session) {
-		System.out.println();
 		bookStoreWebService.placeOrder(myCartMap);
 		myCartMap.clear();
 
-		return null;
+		return "redirect:/showSelectedBooks";
 	}
 }

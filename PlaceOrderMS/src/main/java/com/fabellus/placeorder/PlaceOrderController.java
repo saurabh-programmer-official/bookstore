@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.annotations.ApiOperation;
 
@@ -27,7 +29,7 @@ public class PlaceOrderController {
 		return placeOrderService.getOrdersByUserId(userId);
 		
 	}
-	/*
+
 	@PostMapping("/placeorder")
 	@ApiOperation(value = "placeOrders",response = Order.class, notes = "List of orders")
 	public Order placeholder(@RequestBody OrderInfo orderInfo) {
@@ -35,5 +37,5 @@ public class PlaceOrderController {
 		Order order=placeOrderService.placeOrder(orderInfo);
 		return order;
 	}
-	*/
+
 }

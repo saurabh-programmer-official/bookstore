@@ -10,10 +10,10 @@ public interface BookStoreWebService {
 	
 	public List<Book> getMyBook(String author, String category);
 	public List<Book> getAllBooks();
-	public Book getBookByBookId(int bookId);
+	public BookInfo getBookByBookId(int bookId);
 	public BookInfo getBookInfoByBookId(int bookId);
 	
-	public void placeOrder(Map<Integer,Book> myCartMap);
+	public void placeOrder(Map<Integer,BookInfo> myCartMap);
 	public List<Order>getMyOrders(String userId);
 	public void addUserRating(UserRating userRating);
 	public List<UserRating> getMyRatings(String userId);
