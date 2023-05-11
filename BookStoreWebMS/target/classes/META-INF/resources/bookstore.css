@@ -1,0 +1,48 @@
+myfont{ 
+font-weight: bold; 
+} 
+.mymargin-1{ 
+ margin: 0px 10px; 
+ } 
+.myright{ 
+text-align: right; 
+} 
+.mymargin{ 
+ 
+margin-bottom: 10px; 
+} 
+.myheight{ 
+line-height: 2.5em; 
+} 
+.my-li-no-display{ 
+list-style-type: none; 
+} 
+.myradius{ 
+border-radius: 15px; 
+} 
+.hello{ 
+padding-left: 25px; 
+padding-right: 25px; 
+} 
+.mytext-center{ 
+text-align: center; 
+} 
+.mytext-large{ 
+font-size:22px; 
+} 
+.mytext-extra-large{ 
+font-size:28px; 
+} 
+.mytext-large-bold{ 
+font-size:22px; 
+font-weight: bold; 
+} 
+.mytext{ 
+font-size:18px; 
+} 
+.mytext-small{ 
+font-size:15px; 
+} 
+.mywhite{ 
+color:white; 
+}
