@@ -1,0 +1,38 @@
+package com.fabellus.bookstoreweb;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.fabellus.booksearch.Book;
+import com.fabellus.booksearch.BookInfo;
+import com.fabellus.booksearch.BookInventory;
+import com.fabellus.booksearch.BookRating;
+
+import io.swagger.annotations.ApiOperation;
+
+//Only Using MicroService Name in this case
+@FeignClient(name="http://localhost:7000")
+public interface BookSearchProxy {
+	
+ 
+	
+ 
+		@PutMapping("/updateBookRating") 
+	 
+	@PutMapping("/updateBookInventory") 
+
+	@GetMapping("/mybook/{bookId}")
+	public BookPriceInfo getBookPriceObject(@PathVariable int bookid);
+	
+	@GetMapping("/mybooks/author/{author}/category/{category}")
+	public List<Book> getBooksByAuthorAndCategory(@PathVariable String author, @PathVariable String category);
+
+	@GetMapping("/mybooks")
+	public List<Book> getAllBooks();
+	
+}

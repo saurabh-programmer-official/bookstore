@@ -1,0 +1,21 @@
+package com.fabellus.bookstoreweb;
+
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.fabellus.microservices.bookprice.BookPriceInfo;
+
+@FeignClient(name = "http://localhost:3002")
+public interface BookPriceProxy {
+
+	
+	@GetMapping("/bookPrice/{bookId}")
+	public BookPriceInfo getBookPriceObject(@PathVariable int bookid);
+	
+	
+	@GetMapping("/offeredPrice/{bookId}")
+	public double getBookOfferPrice(@PathVariable int bookid) ;
+	
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.fabellus.booksearch.UserRatingConfig&apos; to &apos;BookSearchConfig&apos;&#x0D;&#x0A;- Original project: &apos;BookSearchMS&apos;&#x0D;&#x0A;- Original element: &apos;com.fabellus.booksearch.UserRatingConfig&apos;&#x0D;&#x0A;- Renamed element: &apos;com.fabellus.booksearch.BookSearchConfig&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;UserRatingConfig&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.fabellus.booksearch{UserRatingConfig.java[UserRatingConfig" matchStrategy="1" name="BookSearchConfig" qualified="false" references="true" similarDeclarations="false" stamp="1683910385696" textual="false" version="1.0"/>
+</session>

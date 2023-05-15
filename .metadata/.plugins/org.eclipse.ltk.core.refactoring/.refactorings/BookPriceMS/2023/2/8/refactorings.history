@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.fabellus.microservices.bookstoreweb&apos; to &apos;com.fabellus.microservices.bookprice&apos;&#x0D;&#x0A;- Original project: &apos;BookPriceMS&apos;&#x0D;&#x0A;- Original element: &apos;BookPriceMS/src/main/java/com.fabellus.microservices.bookstoreweb&apos;&#x0D;&#x0A;- Renamed element: &apos;BookPriceMS/src/main/java/com.fabellus.microservices.bookprice&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.fabellus.microservices.bookstoreweb&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java&lt;com.fabellus.microservices.bookstoreweb" name="com.fabellus.microservices.bookprice" qualified="false" references="true" stamp="1677162238762" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,59 @@
+Feign functionality has been included in the project.
+Project has 5 microservices.
+BookPrice
+BookRating
+BookSearch
+BookStore
+PlaceOrder
+
+Database Used:
+MySQL
+
+Framework Used:
+SpringBoot
+
+Architecture Used:
+Micro-Services
+
+Asynchonous Communication by:
+RabbitMQ Server
+
+Synchronous Communication using:
+Declarative method of invoking Rest API using "Feign"
+
+Following are highights od the Project:
+1> Rest API calls between microservices have been made using declarative method of calling.. "FeignClient" has been used in this project to achieve the same.
+2> Online and Offline interaction between MicroServices
+3> Offline Asynchronous Communication using RabbitMQ and Online Synchronous Communication using Rest Controller
+
+BookPrice MicroService:
+-------------------------
+Interacts with Database jlcbookpricedb
+Interacts with other microservices like BookSearch and PLaceOrder that calls it for seeking BookPrice object or offer price.
+Has 2/3 erst end points defined in RestController
+
+BookRating MicroService:
+--------------------------
+Add UserRating
+User gives rating to book
+Calculates Average Book Rating every time a new User rating for a respective book is added to system
+Interacts with BookSearch Micro Service to provide Book Rating when fetched 
+
+BookSearch MicroService:
+------------------------
+Interacts with BookStore, Placeorder, BookPrice, BookRating MicroService
+Has 3 Entity class:-- Book and BookInventory that interacts with database called jlcbooksearchdb and its respective tables.
+The database jlcbooksearchdb has 2 tables called mybook, mybookinventory and mybookrating.
+It has BookPriceProxy interface which is annotated by @FeignClient and is used to interact with BookPrice MicroService
+
+BookStore MicroService:
+----------------------
+This is customer facing MicroService and interacts with all other MicroServices using either Feign based synchronous communication or the other or RabbitMQ based asynchronous.
+
+PlaceOrder MicroService:
+------------------------
+
+MicroService that has rules for placing order. 
+It has 2 tables and respective entity classes, Order Class and BookInventory Class.
+Whenever an order is placed, local bookinventory table is updated using Spring JPA and remote 
+bookinventory table, part of BookSearch MicroService is updated using RabbitMQ server.
